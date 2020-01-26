@@ -1,0 +1,69 @@
+﻿@model Hostel.Models.Students
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+
+            <h3 class="panel-title">Полная информация</h3>
+        </div>
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayName("Фамилия")
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Surname)
+            </dd>
+
+            <dt>
+                @Html.DisplayName("Имя")
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Name)
+            </dd>
+
+            <dt>
+                @Html.DisplayName("Факультет")
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Faculty)
+            </dd>
+
+            <dt>
+                @Html.DisplayName("Курс")
+            </dt>
+
+            <dd>
+
+                @Html.Raw(ViewBag.Kurs)
+            </dd>
+            <dt>
+                @Html.DisplayName("Корпус")
+            </dt>
+
+            <dd>
+
+                @Html.Raw(ViewBag.HousingId)
+            </dd>
+            <dt>
+                @Html.DisplayName("Комната")
+            </dt>
+
+            <dd>
+
+                @Html.Raw(ViewBag.RoomsId)
+            </dd>
+
+        </dl>
+        <p class="btn btn-default" style = "font-size: 2rem;">
+            @Html.ActionLink("Изменить", "Edit", new { id = Model.StudentsId }) |
+            @Html.ActionLink("Вертуться обратно", "Index")
+        </p>
+    </div>
+

@@ -1,0 +1,93 @@
+﻿@model PagedList.IPagedList<Hostel.Models.Rooms>
+@using PagedList.Mvc;
+
+@{
+    ViewBag.Title = "Home Page";
+}
+
+
+<div class="jumbotron">
+    <h1>Список свободных комнат</h1>
+
+</div>
+
+<div class="row">
+
+
+    @foreach (var b in Model)
+    {
+
+
+        <!-- Карточка (border-primary - цвет границ карточки) -->
+        <div class="col-md-3">
+            <div class="card border-primary mb-4 mx-auto" style="max-width: 300px;">
+                <!-- Шапка (bg-primary - цвет фона, text-white - цвет текста) -->
+                <div class="card-header bg-primary text-white">
+                    Номер комнаты: @b.RoomsId
+                </div>
+                <!-- Текстовый контент -->
+                <div class="card-body">
+                    <h4 class="card-title">Cвободных мест: @b.NumberSeatsFree</h4>
+                    <h4 class="card-title">Занятых мест: @(b.NumberSeats - b.NumberSeatsFree)</h4>
+
+                    <a href="#" class="btn btn-primary">Заселить</a>
+                </div>
+            </div><!-- Конец карточки -->
+        </div>
+
+
+
+
+
+
+
+    }
+</div>
+
+
+
+@Html.PagedListPager(Model, page => Url.Action("Index", "Home", new { page }))
+
+
+@section LogoH {
+    <!-- Top Header -->
+    <div class="top-header container-fluid no-padding">
+        <!-- Container -->
+        <div class="container">
+            <!-- Social -->
+            <div class="col-md-7 col-sm-6 col-xs-12 info">
+                <p><i class="icon icon-Pointer"></i>@ViewBag.Adress</p>
+                <p><i class="icon icon-Phone2"></i><a href="tel:(+01)1234567890" title="Phone" class="phone">@ViewBag.Phone</a></p>
+            </div>
+            @*<div class="col-md-5 col-sm-6 col-xs-12 header-social">
+                    <h5>Follow Us</h5>
+                    <ul>
+                        <li><a href="#" title="Twitter"><i class="fa fa-twitter"></i></a></li>
+                        <li><a href="#" title="Facebook"><i class="fa fa-facebook"></i></a></li>
+                        <li><a href="#" title="Google"><i class="fa fa-google-plus"></i></a></li>
+                        <li><a href="#" title="linkedin"><i class="fa fa-linkedin"></i></a></li>
+                        <li><a href="#" title="Tripadvisor"><i class="fa fa-tripadvisor"></i></a></li>
+                    </ul>
+                </div>*@<!-- Social /- -->
+        </div><!-- Container /- -->
+    </div><!-- Top Header /- -->
+    <!-- Menu Block -->
+    
+    <div class="menu-block container-fluid">
+
+        <!-- Container -->
+        <div class="container">
+            <!-- Navigation -->
+
+
+          
+
+
+
+
+        }
+        @section LogoL {
+            <div class="col-md-3 logotip">
+                <a href=""><img src="~/Content/Global/globimages/XAI.png" alt="" /></a>
+            </div>
+        }

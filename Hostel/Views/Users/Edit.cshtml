@@ -1,0 +1,61 @@
+﻿@model Hostel.Models.Users
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Edit</h2>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Users</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.UsersId)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Possword, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Possword, new { htmlAttributes = new { @class = "form-control", @Value = "", type = "password" , @style = "font-size: 2rem;"} })
+                @Html.ValidationMessageFor(model => model.Possword, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.HousingId, "HousingId", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("HousingId", null, htmlAttributes: new { @class = "form-control" , @style = "font-size: 2rem;"})
+                @Html.ValidationMessageFor(model => model.HousingId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Login, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Login, new { htmlAttributes = new { @class = "form-control" , @style = "font-size: 2rem;"} })
+                @Html.ValidationMessageFor(model => model.Login, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+
+
+@*<div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>*@
+
+@*@section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }*@
