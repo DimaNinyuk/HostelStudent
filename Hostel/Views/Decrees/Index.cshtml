@@ -1,0 +1,58 @@
+﻿@model IEnumerable<Hostel.Models.Decree>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Rooms.RoomsId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Students.Surname)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DateSigning)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DateArrival)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DateEviction)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Rooms.RoomsId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Students.Surname)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DateSigning)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DateArrival)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DateEviction)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.DecreeId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.DecreeId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.DecreeId })
+        </td>
+    </tr>
+}
+
+</table>
