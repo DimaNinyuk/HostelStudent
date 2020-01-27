@@ -16,12 +16,14 @@ namespace Hostel.Controllers
         private HostelStudent db = new HostelStudent();
 
         // GET: Students
+        [Authorize]
         public async Task<ActionResult> Index()
         {
             return View(await db.Students.ToListAsync());
         }
 
         // GET: Students/Details/5
+        [Authorize]
         public async Task<ActionResult> Details(int? id)
         {
             if (id == null)
@@ -40,6 +42,7 @@ namespace Hostel.Controllers
         }
 
         // GET: Students/Create
+        [Authorize]
         public ActionResult Create()
         {
             return View();
@@ -50,6 +53,7 @@ namespace Hostel.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public async Task<ActionResult> Create([Bind(Include = "StudentsId,Surname,Name,Faculty,ReceiptDate")] Students students)
         {
             if (ModelState.IsValid)
@@ -63,6 +67,7 @@ namespace Hostel.Controllers
         }
 
         // GET: Students/Edit/5
+        [Authorize]
         public async Task<ActionResult> Edit(int? id)
         {
             if (id == null)
@@ -82,6 +87,7 @@ namespace Hostel.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public async Task<ActionResult> Edit([Bind(Include = "StudentsId,Surname,Name,Faculty,ReceiptDate")] Students students)
         {
             if (ModelState.IsValid)
@@ -94,6 +100,7 @@ namespace Hostel.Controllers
         }
 
         // GET: Students/Delete/5
+        [Authorize]
         public async Task<ActionResult> Delete(int? id)
         {
             if (id == null)
@@ -111,6 +118,7 @@ namespace Hostel.Controllers
         // POST: Students/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
             Students students = await db.Students.FindAsync(id);
