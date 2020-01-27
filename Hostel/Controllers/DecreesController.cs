@@ -16,6 +16,7 @@ namespace Hostel.Controllers
         private HostelStudent db = new HostelStudent();
 
         // GET: Decrees
+        [Authorize]
         public async Task<ActionResult> Index()
         {
             var decree = db.Decree.Include(d => d.Rooms).Include(d => d.Students);
@@ -23,6 +24,7 @@ namespace Hostel.Controllers
         }
 
         // GET: Decrees/Details/5
+        [Authorize]
         public async Task<ActionResult> Details(int? id)
         {
             if (id == null)
@@ -38,6 +40,7 @@ namespace Hostel.Controllers
         }
 
         // GET: Decrees/Create
+        [Authorize]
         public ActionResult Create()
         {
             ViewBag.RoomsId = new SelectList(db.Rooms, "RoomsId", "RoomsId");
@@ -50,6 +53,7 @@ namespace Hostel.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public async Task<ActionResult> Create([Bind(Include = "DecreeId,DateSigning,DateArrival,DateEviction,StudentsId,RoomsId,HousingId")] Decree decree)
         {
             if (ModelState.IsValid)
@@ -65,6 +69,7 @@ namespace Hostel.Controllers
         }
 
         // GET: Decrees/Edit/5
+        [Authorize]
         public async Task<ActionResult> Edit(int? id)
         {
             if (id == null)
@@ -86,6 +91,7 @@ namespace Hostel.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public async Task<ActionResult> Edit([Bind(Include = "DecreeId,DateSigning,DateArrival,DateEviction,StudentsId,RoomsId,HousingId")] Decree decree)
         {
             if (ModelState.IsValid)
@@ -100,6 +106,7 @@ namespace Hostel.Controllers
         }
 
         // GET: Decrees/Delete/5
+        [Authorize]
         public async Task<ActionResult> Delete(int? id)
         {
             if (id == null)
@@ -117,6 +124,7 @@ namespace Hostel.Controllers
         // POST: Decrees/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
             Decree decree = await db.Decree.FindAsync(id);
