@@ -32,5 +32,7 @@ namespace Hostel.Models
         public virtual Students Students { get; set; }
 
         public virtual Rooms Rooms { get; set; }
+
+        public virtual Housing Housing { get; set; }
     }
 }
