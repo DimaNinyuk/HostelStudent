@@ -16,13 +16,32 @@ namespace Hostel.Controllers
         private HostelStudent db = new HostelStudent();
 
         // GET: Decrees
-        public async Task<ActionResult> Index()
+        [Authorize]
+        public async Task<ActionResult> Index(int? RoomsId)
         {
             var decree = db.Decree.Include(d => d.Rooms).Include(d => d.Students);
+            string login=User.Identity.Name;
+            var HousingId = db.Users.Where(u => u.Login == login).Select(s => s.HousingId).FirstOrDefault();
+            decree =decree.Where(d => d.HousingId == HousingId);
+            if (RoomsId != null )
+            {
+                decree = decree.Where(s => s.Rooms.RoomsId == RoomsId);
+                ViewBag.RoomsId = new SelectList(db.Rooms.Where(h => h.HousingId == HousingId), "RoomsId", "RoomsId");
+                return View(await decree.ToListAsync());
+            }
+            ViewBag.RoomsId = new SelectList(db.Rooms.Where(h=>h.HousingId==HousingId), "RoomsId", "RoomsId");
+            
             return View(await decree.ToListAsync());
         }
 
+
+        
+
+
+
+
         // GET: Decrees/Details/5
+        [Authorize]
         public async Task<ActionResult> Details(int? id)
         {
             if (id == null)
@@ -38,6 +57,7 @@ namespace Hostel.Controllers
         }
 
         // GET: Decrees/Create
+        [Authorize]
         public ActionResult Create()
         {
             ViewBag.RoomsId = new SelectList(db.Rooms, "RoomsId", "RoomsId");
@@ -51,6 +71,7 @@ namespace Hostel.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public async Task<ActionResult> Create([Bind(Include = "DecreeId,DateSigning,DateArrival,DateEviction,StudentsId,RoomsId,HousingId")] Decree decree)
         {
             if (ModelState.IsValid)
@@ -67,6 +88,7 @@ namespace Hostel.Controllers
         }
 
         // GET: Decrees/Edit/5
+        [Authorize]
         public async Task<ActionResult> Edit(int? id)
         {
             if (id == null)
@@ -89,6 +111,7 @@ namespace Hostel.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public async Task<ActionResult> Edit([Bind(Include = "DecreeId,DateSigning,DateArrival,DateEviction,StudentsId,RoomsId,HousingId")] Decree decree)
         {
             if (ModelState.IsValid)
@@ -104,6 +127,7 @@ namespace Hostel.Controllers
         }
 
         // GET: Decrees/Delete/5
+        [Authorize]
         public async Task<ActionResult> Delete(int? id)
         {
             if (id == null)
@@ -121,6 +145,7 @@ namespace Hostel.Controllers
         // POST: Decrees/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
             Decree decree = await db.Decree.FindAsync(id);
