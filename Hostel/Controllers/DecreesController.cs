@@ -60,9 +60,12 @@ namespace Hostel.Controllers
         [Authorize]
         public ActionResult Create()
         {
-            ViewBag.RoomsId = new SelectList(db.Rooms, "RoomsId", "RoomsId");
+            string login = User.Identity.Name;
+            var HousingId = db.Users.Where(u => u.Login == login).Select(s => s.HousingId).FirstOrDefault();
+
+            ViewBag.RoomsId = new SelectList(db.Rooms.Where(r=>r.HousingId==HousingId).Where(f=>f.NumberSeatsFree>0), "RoomsId", "RoomsId");
             ViewBag.StudentsId = new SelectList(db.Students, "StudentsId", "Surname");
-            ViewBag.HousingId = new SelectList(db.Housing, "HousingId", "HousingId");
+            ViewBag.HousingId = new SelectList(db.Housing.Where(h=>h.HousingId==HousingId), "HousingId", "HousingId");
             return View();
         }
 
@@ -74,11 +77,16 @@ namespace Hostel.Controllers
         [Authorize]
         public async Task<ActionResult> Create([Bind(Include = "DecreeId,DateSigning,DateArrival,DateEviction,StudentsId,RoomsId,HousingId")] Decree decree)
         {
+            string login = User.Identity.Name;
+            var HousingId = db.Users.Where(u => u.Login == login).Select(s => s.HousingId).FirstOrDefault();
+            var IdRomsAdd = db.Rooms.Where(r => r.RoomsId == decree.RoomsId).Where(h=>h.HousingId== HousingId).FirstOrDefault();
+            
             if (ModelState.IsValid)
             {
-                db.Decree.Add(decree);
-                await db.SaveChangesAsync();
-                return RedirectToAction("Index");
+                    IdRomsAdd.NumberSeatsFree = IdRomsAdd.NumberSeatsFree - 1;
+                    db.Decree.Add(decree);
+                    await db.SaveChangesAsync();
+                    return RedirectToAction("Index");
             }
 
             ViewBag.RoomsId = new SelectList(db.Rooms, "RoomsId", "RoomsId", decree.RoomsId);
