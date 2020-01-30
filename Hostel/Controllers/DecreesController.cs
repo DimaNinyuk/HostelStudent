@@ -79,10 +79,14 @@ namespace Hostel.Controllers
         {
             string login = User.Identity.Name;
             var HousingId = db.Users.Where(u => u.Login == login).Select(s => s.HousingId).FirstOrDefault();
-            var IdRomsAdd = db.Rooms.Where(r => r.RoomsId == decree.RoomsId).Where(h=>h.HousingId== HousingId).FirstOrDefault();
             
+            var IdRomsAdd = db.Rooms.Where(r => r.RoomsId == decree.RoomsId).Where(h=>h.HousingId== HousingId).FirstOrDefault();
+       
+            var IdRoomsD = db.Decree.Where(s => s.StudentsId == decree.StudentsId).OrderByDescending(s=>s.DecreeId).FirstOrDefault();
+            var IdRomsS = db.Rooms.Where(r => r.RoomsId == IdRoomsD.RoomsId).Where(h => h.HousingId == HousingId).FirstOrDefault() ;
             if (ModelState.IsValid)
             {
+                    IdRomsS.NumberSeatsFree = IdRomsS.NumberSeatsFree +1;
                     IdRomsAdd.NumberSeatsFree = IdRomsAdd.NumberSeatsFree - 1;
                     db.Decree.Add(decree);
                     await db.SaveChangesAsync();
@@ -95,44 +99,44 @@ namespace Hostel.Controllers
             return View(decree);
         }
 
-        // GET: Decrees/Edit/5
-        [Authorize]
-        public async Task<ActionResult> Edit(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Decree decree = await db.Decree.FindAsync(id);
-            if (decree == null)
-            {
-                return HttpNotFound();
-            }
-            ViewBag.RoomsId = new SelectList(db.Rooms, "RoomsId", "RoomsId", decree.RoomsId);
-            ViewBag.StudentsId = new SelectList(db.Students, "StudentsId", "Surname", decree.StudentsId);
-            ViewBag.HousingId = new SelectList(db.Housing, "HousingId", "HousingId", decree.HousingId);
-            return View(decree);
-        }
+        //// GET: Decrees/Edit/5
+        //[Authorize]
+        //public async Task<ActionResult> Edit(int? id)
+        //{
+        //    if (id == null)
+        //    {
+        //        return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        //    }
+        //    Decree decree = await db.Decree.FindAsync(id);
+        //    if (decree == null)
+        //    {
+        //        return HttpNotFound();
+        //    }
+        //    ViewBag.RoomsId = new SelectList(db.Rooms, "RoomsId", "RoomsId", decree.RoomsId);
+        //    ViewBag.StudentsId = new SelectList(db.Students, "StudentsId", "Surname", decree.StudentsId);
+        //    ViewBag.HousingId = new SelectList(db.Housing, "HousingId", "HousingId", decree.HousingId);
+        //    return View(decree);
+        //}
 
-        // POST: Decrees/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        [Authorize]
-        public async Task<ActionResult> Edit([Bind(Include = "DecreeId,DateSigning,DateArrival,DateEviction,StudentsId,RoomsId,HousingId")] Decree decree)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(decree).State = EntityState.Modified;
-                await db.SaveChangesAsync();
-                return RedirectToAction("Index");
-            }
-            ViewBag.RoomsId = new SelectList(db.Rooms, "RoomsId", "RoomsId", decree.RoomsId);
-            ViewBag.StudentsId = new SelectList(db.Students, "StudentsId", "Surname", decree.StudentsId);
-            ViewBag.HousingId = new SelectList(db.Housing, "HousingId", "HousingId", decree.HousingId);
-            return View(decree);
-        }
+        //// POST: Decrees/Edit/5
+        //// To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        //// more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //[Authorize]
+        //public async Task<ActionResult> Edit([Bind(Include = "DecreeId,DateSigning,DateArrival,DateEviction,StudentsId,RoomsId,HousingId")] Decree decree)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        db.Entry(decree).State = EntityState.Modified;
+        //        await db.SaveChangesAsync();
+        //        return RedirectToAction("Index");
+        //    }
+        //    ViewBag.RoomsId = new SelectList(db.Rooms, "RoomsId", "RoomsId", decree.RoomsId);
+        //    ViewBag.StudentsId = new SelectList(db.Students, "StudentsId", "Surname", decree.StudentsId);
+        //    ViewBag.HousingId = new SelectList(db.Housing, "HousingId", "HousingId", decree.HousingId);
+        //    return View(decree);
+        //}
 
         // GET: Decrees/Delete/5
         [Authorize]
