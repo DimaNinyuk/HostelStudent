@@ -155,6 +155,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\DecreesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\PayingsController.cs" />
     <Compile Include="Controllers\StudentsController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Global.asax.cs">
@@ -220,6 +221,11 @@
     <Content Include="Views\Decrees\Details.cshtml" />
     <Content Include="Views\Decrees\Edit.cshtml" />
     <Content Include="Views\Decrees\Index.cshtml" />
+    <Content Include="Views\Payings\Create.cshtml" />
+    <Content Include="Views\Payings\Delete.cshtml" />
+    <Content Include="Views\Payings\Details.cshtml" />
+    <Content Include="Views\Payings\Edit.cshtml" />
+    <Content Include="Views\Payings\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,0 +1,43 @@
+﻿@model Hostel.Models.Paying
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Paying</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Students.Surname)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Students.Surname)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ServicePayment)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ServicePayment)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DatePayment)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DatePayment)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.PayingId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
