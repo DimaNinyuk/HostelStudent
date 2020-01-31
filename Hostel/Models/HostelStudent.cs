@@ -9,6 +9,7 @@ namespace Hostel.Models
     {
         public HostelStudent()
             : base("name=HostelStudent")
+
         {
         }
 
@@ -18,6 +19,7 @@ namespace Hostel.Models
         public virtual DbSet<Rooms> Rooms { get; set; }
         public virtual DbSet<Students> Students { get; set; }
         public virtual DbSet<Users> Users { get; set; }
+        public virtual DbSet<PayStudent> PayStudent { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -66,6 +68,19 @@ namespace Hostel.Models
             modelBuilder.Entity<Users>()
                 .Property(e => e.Login)
                 .IsUnicode(false);
+
+            modelBuilder.Entity<PayStudent>()
+                .Property(e => e.ServicePayment)
+                .HasPrecision(19, 4);
+
+            modelBuilder.Entity<PayStudent>()
+                .Property(e => e.Surname)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<PayStudent>()
+                .Property(e => e.Name)
+                .IsUnicode(false);
+
         }
     }
 }

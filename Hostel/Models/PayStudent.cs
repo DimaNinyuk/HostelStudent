@@ -6,9 +6,12 @@ namespace Hostel.Models
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    [Table("Paying")]
-    public partial class Paying
+    [Table("PayStudent")]
+    public partial class PayStudent
     {
+        [Key]
+        [Column(Order = 0)]
+        [DatabaseGenerated(DatabaseGeneratedOption.None)]
         public int PayingId { get; set; }
 
         [Column(TypeName = "money")]
@@ -18,8 +21,17 @@ namespace Hostel.Models
         [DisplayFormat(DataFormatString = "{0:d}", ApplyFormatInEditMode = true)]
         public DateTime? DatePayment { get; set; }
 
-        public int? StudentsId { get; set; }
+       
+        public int StudentsId { get; set; }
 
-        public virtual Students Students { get; set; }
+        [StringLength(50)]
+        public string Surname { get; set; }
+
+        [StringLength(50)]
+        public string Name { get; set; }
+
+        public int? Faculty { get; set; }
+
+        public int? HousingId { get; set; }
     }
 }
