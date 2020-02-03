@@ -67,9 +67,10 @@
 
         <nav class="navbar ow-navigation navbar-light" style="background-color: #e3f2fd;">
             <ul class="nav nav-pills">
-                <li >@Html.ActionLink("Главная", "Index", "Home")</li>
+                <li>@Html.ActionLink("Главная", "Index", "Home")</li>
                 <li>@Html.ActionLink("Студенты", "Index", "Students")</li>
                 <li>@Html.ActionLink("Приказы", "Index", "Decrees")</li>
+                <li>@Html.ActionLink("Платежи", "Index", "PayStudents")</li>
                 <li>@Html.ActionLink(User.Identity.Name, "Edit", "Users")</li>
                 <li>@Html.ActionLink("Выйти", "Logout", "Account") </li>
             </ul>

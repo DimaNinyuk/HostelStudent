@@ -5,62 +5,64 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Details</h2>
+<div class="panel panel-primary">
+    <div class="panel-heading">
 
-<div>
-    <h4>Decree</h4>
-    <hr />
+        <h3 class="panel-title">Полная информация</h3>
+    </div>
+    <br />
     <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Rooms.RoomsId)
+        <dt style="width:180px ">
+            @Html.DisplayName("Номер комнаты")
         </dt>
 
-        <dd>
+        <dd style="margin-left: 200px"> 
             @Html.DisplayFor(model => model.Rooms.RoomsId)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Students.Surname)
+            @Html.DisplayName("Фамилия")
         </dt>
 
-        <dd>
+        <dd style="margin-left: 200px">
             @Html.DisplayFor(model => model.Students.Surname)
         </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.DateSigning)
+        <dt style="width:180px ">
+            @Html.DisplayName("Дата подписания")
         </dt>
 
-        <dd>
+        <dd style="margin-left: 200px">
             @Html.DisplayFor(model => model.DateSigning)
         </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.DateArrival)
+        <dt style="width:180px ">
+            @Html.DisplayName("Дата въезда")
         </dt>
 
-        <dd>
+        <dd style="margin-left: 200px">
             @Html.DisplayFor(model => model.DateArrival)
         </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.DateEviction)
+        <dt style="width:180px ">
+            @Html.DisplayName("Дата выезда")
         </dt>
 
-        <dd>
+        <dd style="margin-left: 200px">
             @Html.DisplayFor(model => model.DateEviction)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.Housing)
+            @Html.DisplayName("Корпус")
         </dt>
 
-        <dd>
+        <dd style="margin-left: 200px">
             @Html.DisplayFor(model => model.HousingId)
         </dd>
 
     </dl>
+
+    <p class="btn btn-default" style = "font-size: 2rem;">
+       
+        @Html.ActionLink("Назад", "Index")
+    </p>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.DecreeId }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>

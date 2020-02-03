@@ -1,83 +1,95 @@
-﻿@model IEnumerable<Hostel.Models.PayStudent>
-
+﻿@model PagedList.IPagedList<Hostel.Models.PayStudent>
+@using PagedList.Mvc;
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Платежи</h2>
 
-<p>
-    @Html.ActionLink("Добавить платеж", "Create")
-</p>
-
-
-<form method="get">
-    <div class="form-inline">
-        <label class="control-label" style="margin-right:10px;">Номер зачетки:  </label>
-        @Html.TextBox("StudentsId", null, new { htmlAttributes = new { @class = "form-control", style = "margin-right:10px;" } })
-
-        @*<label class="control-label">Позиция игрока: </label>
-        @Html.DropDownList("position", Model.Positions as SelectList,
-                htmlAttributes: new { @class = "form-control" })*@
-
-        <input style="font-size: 2rem;" type="submit" value="Фильтр" class="btn btn-default" />
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <h3 class="panel-title">Платежи</h3>
     </div>
-</form>
-<hr />
+
+    <div class="panel-body">
 
 
 
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayName("Сумма")
-        </th>
-        <th>
-            @Html.DisplayName("Дата оплаты")
-        </th>
-        <th>
-            @Html.DisplayName("Фамилия")
-        </th>
-        <th>
-            @Html.DisplayName("Имя")
-        </th>
-        <th>
-            @Html.DisplayName("Факультет")
-        </th>
-        <th>
-            @Html.DisplayName("Корпус")
-        </th>
-        <th></th>
-    </tr>
 
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.ServicePayment)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DatePayment)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Surname)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Faculty)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.HousingId)
-            </td>
-            <td>
-                @Html.ActionLink("Изменить", "Edit", new { id = item.PayingId }) |
-                @Html.ActionLink("Детально", "Details", new { id = item.PayingId }) |
-                @Html.ActionLink("Удалить", "Delete", new { id = item.PayingId })
-            </td>
-        </tr>
-    }
+        <p>
+            @Html.ActionLink("Добавить платеж", "Create")
+        </p>
 
-</table>
+
+        <form method="get">
+            <div class="form-inline">
+                <label class="control-label" style="margin-right:10px;">Номер зачетки:  </label>
+                @Html.TextBox("StudentsId", null, new { htmlAttributes = new { @class = "form-control", style = "margin-right:10px;" } })
+
+                @*<label class="control-label">Позиция игрока: </label>
+                @Html.DropDownList("position", Model.Positions as SelectList,
+                        htmlAttributes: new { @class = "form-control" })*@
+
+                <input style="font-size: 2rem;" type="submit" value="Фильтр" class="btn btn-default" />
+            </div>
+        </form>
+
+
+
+
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayName("Сумма")
+                </th>
+                <th>
+                    @Html.DisplayName("Дата оплаты")
+                </th>
+                <th>
+                    @Html.DisplayName("Фамилия")
+                </th>
+                <th>
+                    @Html.DisplayName("Имя")
+                </th>
+                <th>
+                    @Html.DisplayName("Факультет")
+                </th>
+                <th>
+                    @Html.DisplayName("Корпус")
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ServicePayment)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DatePayment)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Surname)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Faculty)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.HousingId)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Изменить", "Edit", new { id = item.PayingId }) |
+                        @Html.ActionLink("Детально", "Details", new { id = item.PayingId }) |
+                        @Html.ActionLink("Удалить", "Delete", new { id = item.PayingId })
+                    </td>
+                </tr>
+            }
+
+        </table>
+        @Html.PagedListPager(Model, page => Url.Action("Index", "Decrees", new { page }))
+    </div>
+</div>

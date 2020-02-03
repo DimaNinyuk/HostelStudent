@@ -8,7 +8,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Hostel.Models;
-
+using PagedList;
 namespace Hostel.Controllers
 {
     public class DecreesController : Controller
@@ -17,21 +17,21 @@ namespace Hostel.Controllers
 
         // GET: Decrees
         [Authorize]
-        public async Task<ActionResult> Index(int? RoomsId)
+        public async Task<ActionResult> Index(int? RoomsId, int? page)
         {
-            var decree = db.Decree.Include(d => d.Rooms).Include(d => d.Students);
+            var decree = db.Decree.Include(d => d.Rooms).Include(d => d.Students).ToList();
             string login=User.Identity.Name;
             var HousingId = db.Users.Where(u => u.Login == login).Select(s => s.HousingId).FirstOrDefault();
-            decree =decree.Where(d => d.HousingId == HousingId);
+            decree =decree.Where(d => d.HousingId == HousingId).ToList();
             if (RoomsId != null )
             {
-                decree = decree.Where(s => s.Rooms.RoomsId == RoomsId);
+                decree = decree.Where(s => s.Rooms.RoomsId == RoomsId).ToList();
                 ViewBag.RoomsId = new SelectList(db.Rooms.Where(h => h.HousingId == HousingId), "RoomsId", "RoomsId");
-                return View(await decree.ToListAsync());
+                return View( decree.ToPagedList(page ?? 1, 5));
             }
             ViewBag.RoomsId = new SelectList(db.Rooms.Where(h=>h.HousingId==HousingId), "RoomsId", "RoomsId");
             
-            return View(await decree.ToListAsync());
+            return View( decree.ToPagedList(page ?? 1, 5));
         }
 
 

@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Hostel.Models;
+using PagedList;
 
 namespace Hostel.Controllers
 {
@@ -15,7 +16,8 @@ namespace Hostel.Controllers
         private HostelStudent db = new HostelStudent();
 
         // GET: PayStudents
-        public ActionResult Index(int? StudentsId)
+        [Authorize]
+        public ActionResult Index(int? StudentsId, int? page)
         {
             string login = User.Identity.Name;
             int? HousingId = db.Users.Where(u => u.Login == login).Select(s => s.HousingId).FirstOrDefault();
@@ -25,14 +27,15 @@ namespace Hostel.Controllers
             {
                 paustudents= paustudents.Where(s => s.StudentsId == StudentsId);
                 
-                return View(paustudents.ToList());
+                return View(paustudents.ToList().ToPagedList(page ?? 1, 5));
             }
 
 
-                return View(paustudents.ToList());
+                return View(paustudents.ToList().ToPagedList(page ?? 1, 5));
         }
 
         // GET: PayStudents/Details/5
+        [Authorize]
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -48,6 +51,7 @@ namespace Hostel.Controllers
         }
 
         // GET: PayStudents/Create
+        [Authorize]
         public ActionResult Create()
         {
             
@@ -61,6 +65,7 @@ namespace Hostel.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public ActionResult Create([Bind(Include = "PayingId,StudentsId,ServicePayment,DatePayment")] Paying payStudent)
         {
             
@@ -75,6 +80,7 @@ namespace Hostel.Controllers
         }
 
         // GET: PayStudents/Edit/5
+        [Authorize]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -94,6 +100,7 @@ namespace Hostel.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public ActionResult Edit([Bind(Include = "PayingId,ServicePayment,DatePayment,StusentId")] Paying payStudent)
         {
             if (ModelState.IsValid)
@@ -106,6 +113,7 @@ namespace Hostel.Controllers
         }
 
         // GET: PayStudents/Delete/5
+        [Authorize]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -123,6 +131,7 @@ namespace Hostel.Controllers
         // POST: PayStudents/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize]
         public ActionResult DeleteConfirmed(int id)
         {
             Paying payStudent = db.Paying.Find(id);

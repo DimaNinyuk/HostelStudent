@@ -1,5 +1,5 @@
-﻿@model IEnumerable<Hostel.Models.Students>
-
+﻿@model PagedList.IPagedList<Hostel.Models.Students>
+@using PagedList.Mvc;
 
 @{
     ViewBag.Title = "Index";
@@ -48,7 +48,7 @@
                     <td>
                         @Html.DisplayFor(modelItem => item.ReceiptDate)
                     </td>
-                    <td >
+                    <td>
                         @Html.ActionLink("Изменить", "Edit", new { id = item.StudentsId }) |
                         @Html.ActionLink("Детальная информация", "Details", new { id = item.StudentsId }) |
                         @Html.ActionLink("Удалить", "Delete", new { id = item.StudentsId })
@@ -57,6 +57,7 @@
             }
 
         </table>
+        @Html.PagedListPager(Model, page => Url.Action("Index", "Decrees", new { page }))
     </div>
 </div>
 

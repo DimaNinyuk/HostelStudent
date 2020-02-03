@@ -1,78 +1,88 @@
-﻿@model IEnumerable<Hostel.Models.Decree>
-
+﻿@model PagedList.IPagedList<Hostel.Models.Decree>
+@using PagedList.Mvc;
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
-
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-
-
-
-
-<form method="get">
-    <div class="form-inline">
-        <label class="control-label" style="margin-right:10px;">Номер комнаты:  </label>
-        @Html.DropDownList("RoomsId", null,
-                    htmlAttributes: new { @class = "form-control" ,style="margin-right:10px;"})
-
-        @*<label class="control-label">Позиция игрока: </label>
-        @Html.DropDownList("position", Model.Positions as SelectList,
-                htmlAttributes: new { @class = "form-control" })*@
-
-        <input style = "font-size: 2rem;"  type="submit" value="Фильтр" class="btn btn-default" />
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <h3 class="panel-title">Приказы</h3>
     </div>
-</form>
-<hr />
 
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Rooms.RoomsId)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Students.Surname)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.DateSigning)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.DateArrival)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.DateEviction)
-        </th>
-        <th></th>
-    </tr>
+    <div class="panel-body">
 
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Rooms.RoomsId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Students.Surname)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DateSigning)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DateArrival)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DateEviction)
-            </td>
-            <td>
-               @* @Html.ActionLink("Edit", "Edit", new { id = item.DecreeId }) |*@
-                @Html.ActionLink("Details", "Details", new { id = item.DecreeId }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.DecreeId })
-            </td>
-        </tr>
-    }
 
-</table>
+
+
+        <p>
+            @Html.ActionLink("Добавить приказ", "Create")
+        </p>
+
+
+
+        <form method="get">
+            <div class="form-inline">
+                <label class="control-label" style="margin-right:10px;">Номер комнаты:  </label>
+                @Html.DropDownList("RoomsId", null,
+                            htmlAttributes: new { @class = "form-control", style = "margin-right:10px;" })
+
+                @*<label class="control-label">Позиция игрока: </label>
+                @Html.DropDownList("position", Model.Positions as SelectList,
+                        htmlAttributes: new { @class = "form-control" })*@
+
+                <input style="font-size: 2rem;" type="submit" value="Фильтр" class="btn btn-default" />
+            </div>
+        </form>
+        <hr />
+
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayName("Номер комнаты")
+                </th>
+                <th>
+                    @Html.DisplayName("Фамилия")
+                </th>
+                <th>
+                    @Html.DisplayName("Дата подписания")
+                </th>
+                <th>
+                    @Html.DisplayName("Дата въезда")
+                </th>
+                <th>
+                    @Html.DisplayName("Дата выезда")
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Rooms.RoomsId)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Students.Surname)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DateSigning)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DateArrival)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DateEviction)
+                    </td>
+                    <td>
+                        @* @Html.ActionLink("Edit", "Edit", new { id = item.DecreeId }) |*@
+                        @Html.ActionLink("Полная информация", "Details", new { id = item.DecreeId }) |
+                        @Html.ActionLink("Удалить", "Delete", new { id = item.DecreeId })
+                    </td>
+                </tr>
+            }
+
+        </table>
+        @Html.PagedListPager(Model, page => Url.Action("Index", "Decrees", new { page }))
+    </div>
+</div>

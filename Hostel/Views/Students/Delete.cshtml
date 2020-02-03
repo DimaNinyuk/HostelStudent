@@ -18,35 +18,35 @@
         <div>
            
             <dl class="dl-horizontal">
-                <dt>
-                    @Html.DisplayNameFor(model => model.Surname)
+                <dt style="width=180px">
+                    @Html.DisplayName("Фамилия")
                 </dt>
 
-                <dd>
+                <dd style="margin-left: 200px">
                     @Html.DisplayFor(model => model.Surname)
                 </dd>
 
                 <dt>
-                    @Html.DisplayNameFor(model => model.Name)
+                    @Html.DisplayName("Имя")
                 </dt>
 
-                <dd>
+                <dd style="margin-left: 200px">
                     @Html.DisplayFor(model => model.Name)
                 </dd>
 
                 <dt>
-                    @Html.DisplayNameFor(model => model.Faculty)
+                    @Html.DisplayName("Факультет")
                 </dt>
 
-                <dd>
+                <dd style="margin-left: 200px">
                     @Html.DisplayFor(model => model.Faculty)
                 </dd>
 
-                <dt>
-                    @Html.DisplayNameFor(model => model.ReceiptDate)
+                <dt style="width:180px ">
+                    @Html.DisplayName("Дата поступления")
                 </dt>
 
-                <dd>
+                <dd style="margin-left: 200px">
                     @Html.DisplayFor(model => model.ReceiptDate)
                 </dd>
 
@@ -57,8 +57,8 @@
                 @Html.AntiForgeryToken()
 
                 <div class="form-actions no-color btn btn-default" style = "font-size: 2rem;" >
-                    <input type="submit" value="Delete" class="btn btn-default" style = "font-size: 2rem;"/> |
-                    @Html.ActionLink("Вертуться обратно", "Index")
+                    <input type="submit" value="Удалить" class="btn btn-default" style = "font-size: 2rem;"/> |
+                    @Html.ActionLink("Назад", "Index")
                 </div>
             }
         </div>

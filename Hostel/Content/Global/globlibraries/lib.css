@@ -39,6 +39,20 @@ File : loaders.min.css
  
  
  /* -- ElegantIcons */
+
+.dts {
+    float: left;
+    width: 200px;
+    overflow: hidden;
+    clear: left;
+    text-align: right;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+
+
+
 @font-face { 
 	font-family: 'ElegantIcons';
 	src:url('fonts/ElegantIcons.eot');
@@ -766,3 +780,4 @@ you can use the generic selector below, but it's slower:
 .icon-Agenda:before {
 	content: "\e6c7";
 }
+

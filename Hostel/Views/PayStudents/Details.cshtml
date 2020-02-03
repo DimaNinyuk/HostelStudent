@@ -5,63 +5,66 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Details</h2>
+    <div class="panel panel-primary">
+        <div class="panel-heading">
 
-<div>
-    <h4>PayStudent</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.ServicePayment)
-        </dt>
+            <h3 class="panel-title">Полная информация</h3>
+        </div>
+        <h4> Номер зачетки  №@Model.StudentsId</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayName("Сумма")
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.ServicePayment)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.ServicePayment)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.DatePayment)
-        </dt>
+            <dt>
+                @Html.DisplayName("Дата")
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.DatePayment)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.DatePayment)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Surname)
-        </dt>
+            <dt>
+                @Html.DisplayName("Фамилия")
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Surname)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.Surname)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
+            <dt>
+                @Html.DisplayName("Имя")
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Name)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.Name)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Faculty)
-        </dt>
+            <dt>
+                @Html.DisplayName("Факультет")
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Faculty)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.Faculty)
+            </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.HousingId)
-        </dt>
+            <dt>
+                @Html.DisplayName("Корпус")
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.HousingId)
-        </dd>
+            <dd>
+                @Html.DisplayFor(model => model.HousingId)
+            </dd>
 
-    </dl>
-</div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+        </dl>
+        <p class="btn btn-default" style = "font-size: 2rem;">
+            @Html.ActionLink("Изменить", "Edit", new { id = Model.PayingId }) |
+            @Html.ActionLink("Назад", "Index")
+        </p>
+    </div>
+

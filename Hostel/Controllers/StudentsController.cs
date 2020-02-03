@@ -8,6 +8,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Hostel.Models;
+using PagedList;
 
 namespace Hostel.Controllers
 {
@@ -17,9 +18,10 @@ namespace Hostel.Controllers
 
         // GET: Students
         [Authorize]
-        public async Task<ActionResult> Index()
+        public async Task<ActionResult> Index(int? page)
         {
-            return View(await db.Students.ToListAsync());
+
+            return View( db.Students.ToList().ToPagedList(page ?? 1, 5));
         }
 
         // GET: Students/Details/5
