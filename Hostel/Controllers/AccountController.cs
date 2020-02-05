@@ -41,6 +41,7 @@ namespace Hostel.Controllers
         }
         public ActionResult Logout()
         {
+            
             FormsAuthentication.SignOut();
             return RedirectToAction("Login", "Account");
         }

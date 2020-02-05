@@ -137,5 +137,20 @@ namespace Hostel.Controllers
             }
             base.Dispose(disposing);
         }
+        public ActionResult Deleterooms(int? idRooms)
+        {
+            if (idRooms == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            string login = User.Identity.Name;
+            var HousingId = db.Users.Where(u => u.Login == login).Select(s => s.HousingId).FirstOrDefault();
+
+            var rooms = db.Rooms.Where(s => s.RoomsId == idRooms).Where(w=>w.HousingId==HousingId).FirstOrDefault();
+            rooms.NumberSeatsFree = rooms.NumberSeatsFree+1;
+            db.Entry(rooms).State = EntityState.Modified;
+            db.SaveChangesAsync();
+            return RedirectToAction("Index");
+        }
     }
 }

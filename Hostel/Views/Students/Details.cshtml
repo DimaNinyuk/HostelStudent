@@ -61,9 +61,10 @@
             </dd>
 
         </dl>
-        <p class="btn btn-default" style = "font-size: 2rem;">
+        <p class="btn btn-default" style="font-size: 2rem;">
             @Html.ActionLink("Изменить", "Edit", new { id = Model.StudentsId }) |
-            @Html.ActionLink("Назад", "Index")
+            @Html.ActionLink("Назад", "Index")|
+            @Html.ActionLink("Выселить", "Deleterooms", new { idRooms =  ViewBag.RoomsId })
         </p>
     </div>
 
